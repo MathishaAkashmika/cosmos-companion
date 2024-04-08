@@ -1,4 +1,4 @@
-# cosmos_companion
+# Cosmos Companion
 
 ## Getting Started
 
