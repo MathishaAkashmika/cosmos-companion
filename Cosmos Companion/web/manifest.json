@@ -1,6 +1,6 @@
 {
-    "name": "cosmos_companion",
-    "short_name": "cosmos_companion",
+    "name": "ostt",
+    "short_name": "ostt",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
