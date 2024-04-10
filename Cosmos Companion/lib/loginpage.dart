@@ -1,101 +1,175 @@
+import 'package:cosmos_companion/service/auth.dart';
+import 'forgot_password.dart';
+import 'package:cosmos_companion/testpage.dart';
+import 'signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LogIn extends StatefulWidget {
+  const LogIn({Key? key}) : super(key: key);
+
+  @override
+  State<LogIn> createState() => _LogInState();
+}
+
+class _LogInState extends State<LogIn> {
+  String email = "", password = "";
+
+  TextEditingController mailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+
+  final _formkey = GlobalKey<FormState>();
+
+  userLogin() async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => testWidget()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "No User Found for that Email",
+              style: TextStyle(fontSize: 18.0),
+            )));
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "Wrong Password Provided by User",
+              style: TextStyle(fontSize: 18.0),
+            )));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage("https://i.ibb.co/nkTGrXW/image-16.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        padding: EdgeInsets.all(32), // Add padding around the content
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'WELCOME\nBACK',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 44,
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
-                height: 1.2, // Line height
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset(
+                'assets/astronomy.png',
+                height: 270,
+                width: 20,
+                fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 80), // Space between text and input fields
-            TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.white70),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    Container(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      decoration: BoxDecoration(
+                          color: Color(0xFFedf0f8),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter E-mail';
+                          }
+                          return null;
+                        },
+                        controller: mailcontroller,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Email",
+                            hintStyle: TextStyle(
+                                color: Color(0xFFb2b7bf), fontSize: 18.0)),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    Container(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      decoration: BoxDecoration(
+                          color: Color(0xFFedf0f8),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextFormField(
+                        controller: passwordcontroller,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter Password';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Password",
+                            hintStyle: TextStyle(
+                                color: Color(0xFFb2b7bf), fontSize: 18.0)),
+                        obscureText: true,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if (_formkey.currentState!.validate()) {
+                          setState(() {
+                            email = mailcontroller.text;
+                            password = passwordcontroller.text;
+                          });
+                          userLogin();
+                        }
+                      },
+                      child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 13.0, horizontal: 30.0),
+                          decoration: BoxDecoration(
+                              color: Color(0xFF273671),
+                              borderRadius: BorderRadius.circular(30)),
+                          child: Center(
+                              child: Text(
+                                "Sign In",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.w500),
+                              ))),
+                    ),
+                  ],
                 ),
               ),
             ),
-            SizedBox(height: 50), // Space between fields
-            TextField(
-              obscureText: true, // Hide password text
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: 'Password',
-                hintStyle: TextStyle(color: Colors.white70),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-              ),
+            SizedBox(
+              height: 20.0,
             ),
-            SizedBox(height: 40), // Space before the button
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 25),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                textStyle: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-              onPressed: () {
-                // Handle login logic
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ForgotPassword()));
               },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Log In'),
-                  SizedBox(width: 8), // Spacing between text and icon
-                  Icon(
-                    Icons.arrow_forward,
-                    size: 24,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20), // Space before the forgot password link
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  // Handle "forgot password" logic
-                },
-                child: Text(
-                  'forgot password? reset',
+              child: Text("Forgot Password?",
                   style: TextStyle(
-                    color: Colors.blue.shade300,
-                  ),
-                ),
-              ),
+                      color: Color(0xFF8c8e98),
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w500)),
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              ],
             ),
           ],
         ),
