@@ -1,12 +1,28 @@
+import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'loginpage.dart';
 import 'signup.dart';
 import 'welcomepage.dart';
 
-void main() => runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  Platform.isAndroid
+    ? await Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: "AIzaSyD1xwbgNA1OMwwb6uDJdFveucW5AARprUM",
+          appId: "1:938182591706:android:aefbdcf13933391ffad1e3",
+          messagingSenderId: "938182591706",
+          projectId: "cosmos-companion-fab45",
+        ),
+      )
+    : await Firebase.initializeApp();
+    runApp(CosmosCompanion());
+}
+
+class CosmosCompanion extends StatelessWidget {
+  const CosmosCompanion({super.key});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
