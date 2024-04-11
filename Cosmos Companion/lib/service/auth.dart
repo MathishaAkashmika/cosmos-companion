@@ -1,4 +1,4 @@
-import 'package:cosmos_companion/testpage.dart';
+import 'package:cosmos_companion/screens/testpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

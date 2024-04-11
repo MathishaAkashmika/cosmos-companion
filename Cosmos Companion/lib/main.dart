@@ -1,9 +1,10 @@
 import 'dart:io';
+import 'package:cosmos_companion/admin/updates_add.dart';
+import 'package:cosmos_companion/admin/updates_read.dart';
+import 'package:cosmos_companion/screens/user_read.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'loginpage.dart';
-import 'signup.dart';
-import 'welcomepage.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ class CosmosCompanion extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // A widget which will be started on application startup
-      home: WelcomePage(),
+      home: ReadData(),
     );
   }
 }

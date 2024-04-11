@@ -1,7 +1,8 @@
+import 'package:cosmos_companion/screens/planetpage.dart';
+import 'package:cosmos_companion/screens/testpage.dart';
 import 'package:cosmos_companion/service/auth.dart';
 import 'forgot_password.dart';
-import 'package:cosmos_companion/testpage.dart';
-import 'signup.dart';
+import 'add_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +25,18 @@ class _LogInState extends State<LogIn> {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => testWidget()));
+      // Check if admin username and password match
+      if (mailcontroller.text == 'admin@admin.com' &&
+          passwordcontroller.text == 'admin123') {
+        // Navigate to the admin control page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PlanetsPage()),
+        );
+      } else {
+        // Navigate to the HomePage
+        Navigator.push(
+          context, MaterialPageRoute(builder: (context) => testWidget()));};
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -43,6 +54,9 @@ class _LogInState extends State<LogIn> {
             )));
       }
     }
+
+
+
   }
 
   @override
@@ -128,6 +142,7 @@ class _LogInState extends State<LogIn> {
                           });
                           userLogin();
                         }
+
                       },
                       child: Container(
                           width: MediaQuery.of(context).size.width,

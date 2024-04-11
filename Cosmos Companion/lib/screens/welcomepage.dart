@@ -1,5 +1,5 @@
+import 'package:cosmos_companion/screens/add_user.dart';
 import 'package:flutter/material.dart';
-import 'signup.dart';
 
 class WelcomePage extends StatelessWidget {
   @override

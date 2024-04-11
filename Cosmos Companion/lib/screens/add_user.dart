@@ -1,4 +1,4 @@
-import 'package:cosmos_companion/loginpage.dart';
+import 'package:cosmos_companion/screens/loginpage.dart';
 import 'package:cosmos_companion/service/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -175,6 +175,7 @@ class _SignUpState extends State<SignUp> {
                                     fontSize: 22.0,
                                     fontWeight: FontWeight.w500),
                               ))),
+
                     ),
                   ],
                 ),
