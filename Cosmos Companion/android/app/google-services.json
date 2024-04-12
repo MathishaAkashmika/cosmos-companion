@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "938182591706",
+    "project_id": "cosmos-companion-fab45",
+    "storage_bucket": "cosmos-companion-fab45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938182591706:android:aefbdcf13933391ffad1e3",
+        "android_client_info": {
+          "package_name": "com.example.cosmos_companion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1xwbgNA1OMwwb6uDJdFveucW5AARprUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
