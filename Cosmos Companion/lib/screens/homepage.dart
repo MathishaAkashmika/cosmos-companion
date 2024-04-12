@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.all(16),
                 childAspectRatio: 1.5,
                 children: <Widget>[
-                  _buildButton(context, "Home", Icons.home, '/home', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
+                  _buildButton(context, "Join", Icons.home, '/login', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
                   _buildButton(context, "Explore", Icons.public, '/planetPage', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
                   _buildButton(context, "TopProjects", Icons.star, '/topProjects', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
                   _buildButton(context, "Updates", Icons.update, '/updates', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
@@ -137,6 +137,7 @@ class HomePage extends StatelessWidget {
                   _buildButton(context, "Favorites", Icons.favorite, '/favorites', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
                   _buildButton(context, "AboutUs", Icons.info, '/aboutUs', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
                   _buildButton(context, "ContactUs", Icons.contacts, '/contactUs', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
+                  _buildButton(context, "ChatBot", Icons.contacts, '/login', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
                 ],
               ),
             ),

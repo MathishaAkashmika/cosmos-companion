@@ -8,11 +8,13 @@ import 'package:cosmos_companion/screens/contactus.dart';
 import 'package:cosmos_companion/screens/favoritepage.dart';
 import 'package:cosmos_companion/screens/gallery.dart';
 import 'package:cosmos_companion/screens/homepage.dart';
+import 'package:cosmos_companion/screens/loginpage.dart';
 import 'package:cosmos_companion/screens/planetpage.dart';
 import 'package:cosmos_companion/screens/projectspage.dart';
 import 'package:cosmos_companion/screens/welcomepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:cosmos_companion/chatbot/chat_bot.dart';
 
 
 void main() async{
@@ -42,16 +44,17 @@ class CosmosCompanion extends StatelessWidget {
       // Application theme data, you can set the colors for the application as
       // you want
       theme: ThemeData(
-        // useMaterial3: false,
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
       // A widget which will be started on application startup
-      home:  HomePage(),
+      home:  WelcomePage(),
       routes: {
         '/createPage': (context) => const UpdatesAdd(),
         '/readPage': (context) => const UserReadData(),
         '/updatePage': (context) => const ReadData(),
         '/home': (context) =>  HomePage(),
+        '/login': (context) =>  LogIn(),
         '/planetPage': (context) =>  PlanetsPage(),
         '/topProjects': (context) => ProjectsPage(),
         '/updates': (context) => const UserReadData(),
@@ -59,6 +62,7 @@ class CosmosCompanion extends StatelessWidget {
         '/favorites': (context) => const FavoritesPage(favorites: [],),
         '/aboutUs': (context) =>  AboutUsPage(),
         '/contactUs': (context) => const ContactUsPage(),
+        '/chatbot': (context) => const ChatScreen(),
       },
     );
   }

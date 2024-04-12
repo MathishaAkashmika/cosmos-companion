@@ -1,4 +1,5 @@
 import 'package:cosmos_companion/screens/add_user.dart';
+import 'package:cosmos_companion/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -22,14 +23,17 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.center,
-            child: Text(
-              'COSMOS',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 48,
-                fontWeight: FontWeight.normal,
+            child: Container(
+              height: 550, // Adjust the height as needed
+              child: const Text(
+                'COSMOS',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 48,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ),
@@ -54,7 +58,7 @@ class WelcomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUp()),
+                    MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 },
                 child: const Text(

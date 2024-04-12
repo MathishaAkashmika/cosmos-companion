@@ -1,6 +1,8 @@
 import 'package:cosmos_companion/screens/planetpage.dart';
 import 'package:cosmos_companion/screens/testpage.dart';
 import 'package:cosmos_companion/service/auth.dart';
+import '../chatbot/chat_bot.dart';
+import 'adminpanel.dart';
 import 'forgot_password.dart';
 import 'add_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,12 +33,12 @@ class _LogInState extends State<LogIn> {
         // Navigate to the admin control page
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PlanetsPage()),
+          MaterialPageRoute(builder: (context) => AdminPanelPage()),
         );
       } else {
         // Navigate to the HomePage
         Navigator.push(
-          context, MaterialPageRoute(builder: (context) => testWidget()));};
+          context, MaterialPageRoute(builder: (context) => ChatScreen()));};
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -68,8 +70,8 @@ class _LogInState extends State<LogIn> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'assets/astronomy.png',
+              child: Image.network(
+                'https://i.ibb.co/pWb95wD/2151075901-1.jpg', // Replace this URL with your image URL
                 height: 270,
                 width: 20,
                 fit: BoxFit.cover,
