@@ -23,20 +23,35 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
           ),
-          Align(
+            Align(
             alignment: Alignment.center,
             child: Container(
-              height: 550, // Adjust the height as needed
-              child: const Text(
-                'COSMOS',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 48,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
+            height: 600, // Adjust the height as needed
+            child: const Column(
+            mainAxisSize: MainAxisSize.min, // Ensures the column only takes up needed space
+            mainAxisAlignment: MainAxisAlignment.start, // Aligns children to the start of the column
+            crossAxisAlignment: CrossAxisAlignment.center, // Keeps the text centered horizontally
+            children: [
+            Text(
+            'COSMOS',
+            style: TextStyle(
+            color: Colors.white,
+            fontSize: 48,
+            fontWeight: FontWeight.normal,
             ),
-          ),
+            ),
+            SizedBox(height: 0), // Space between "COSMOS" and the small text
+            Text(
+            'COMPANION', // Small descriptive text
+            style: TextStyle(
+            color: Colors.white70, // Lighter color for distinction
+            fontSize: 16, // Smaller font size for the subtitle
+    ),
+    ),
+    ],
+    ),
+    ),
+            ),
           Positioned(
             bottom: 50.0,
             left: 0,
@@ -45,7 +60,7 @@ class WelcomePage extends StatelessWidget {
               alignment: Alignment.center,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xffea3204),
+                  backgroundColor: Colors.transparent,
                   padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
                   textStyle: const TextStyle(
                     fontSize: 24,
@@ -61,14 +76,25 @@ class WelcomePage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 },
-                child: const Text(
-                  'START',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                    letterSpacing: 1.2,
-                  ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min, // Use this to minimize the row's size to fit its children
+                  children: <Widget>[
+                    Text(
+                      'START',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    SizedBox(width: 10), // Adds space between the text and the icon
+                    Icon(
+                      Icons.arrow_forward, // Example of a forward arrow icon
+                      color: Colors.white,
+                      size: 30.0, // Increase the size here to make the icon appear "longer"
+                    ),
+                  ],
                 ),
               ),
             ),
