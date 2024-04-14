@@ -1,4 +1,3 @@
-import 'package:cosmos_companion/screens/add_user.dart';
 import 'package:cosmos_companion/screens/homepage.dart';
 import 'package:flutter/material.dart';
 

@@ -1,10 +1,8 @@
 import 'package:cosmos_companion/screens/planetpage.dart';
-import 'package:cosmos_companion/screens/testpage.dart';
 import 'package:cosmos_companion/service/auth.dart';
 import '../chatbot/chat_bot.dart';
 import 'adminpanel.dart';
 import 'forgot_password.dart';
-import 'add_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cosmos_companion/admin/updates_add.dart';
 import 'package:cosmos_companion/admin/updates_read.dart';
-import 'package:cosmos_companion/admin/user_read.dart';
 import 'package:cosmos_companion/screens/aboutus.dart';
 import 'package:cosmos_companion/screens/adminpanel.dart';
 import 'package:cosmos_companion/screens/contactus.dart';
@@ -11,6 +10,7 @@ import 'package:cosmos_companion/screens/homepage.dart';
 import 'package:cosmos_companion/screens/loginpage.dart';
 import 'package:cosmos_companion/screens/planetpage.dart';
 import 'package:cosmos_companion/screens/projectspage.dart';
+import 'package:cosmos_companion/shared/user_read.dart';
 import 'package:cosmos_companion/screens/welcomepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

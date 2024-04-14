@@ -1,4 +1,4 @@
-import 'package:cosmos_companion/screens/testpage.dart';
+import 'package:cosmos_companion/screens/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +42,7 @@ class AuthMethods {
           .addUser(userDetails.uid, userInfoMap)
           .then((value) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => testWidget()));
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       });
     }
   }

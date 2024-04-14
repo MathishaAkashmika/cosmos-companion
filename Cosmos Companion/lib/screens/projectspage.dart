@@ -1,10 +1,9 @@
 import 'package:cosmos_companion/screens/homepage.dart';
 import 'package:cosmos_companion/screens/planetpage.dart';
+import 'package:cosmos_companion/shared/user_read.dart';
 import 'package:cosmos_companion/screens/welcomepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../admin/user_read.dart';
 import '../models/project.dart';
 import '../widgets/projectcard.dart';
 import 'aboutus.dart';
