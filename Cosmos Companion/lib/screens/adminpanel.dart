@@ -1,7 +1,16 @@
+import 'package:cosmos_companion/screens/planetpage.dart';
+import 'package:cosmos_companion/screens/projectspage.dart';
 import 'package:cosmos_companion/screens/welcomepage.dart';
 import 'package:flutter/material.dart';
 
+import 'aboutus.dart';
 import 'favoritepage.dart';
+import '../admin/user_read.dart';
+import 'aboutus.dart';
+import 'contactus.dart';
+import 'favoritepage.dart';
+import 'gallery.dart';
+import 'homepage.dart';
 
 class AdminPanelPage extends StatelessWidget {
   @override
@@ -16,7 +25,10 @@ class AdminPanelPage extends StatelessWidget {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                image: DecorationImage(
+                  image: AssetImage('assets/img/welcome_page_img.png'), // Replace 'assets/your_image_name.png' with your local asset path
+                  fit: BoxFit.cover,
+                ),
               ),
               child: Text('Cosmos Companion', style: TextStyle(color: Colors.white, fontSize: 24)),
             ),
@@ -27,38 +39,71 @@ class AdminPanelPage extends StatelessWidget {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the HomeScreen
                 // Make sure you have a HomeScreen class defined to navigate to
-                Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
               },
             ),
             ListTile(
-              leading: const Icon(Icons.favorite),
-              title: const Text('Favorites'),
+              leading: Icon(Icons.favorite),
+              title: Text('Favorites'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesPage(favorites: [],)));
               },
             ),
             ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Profile'),
+              leading: Icon(Icons.explore),
+              title: Text('Explore'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
-                // Navigate to the HomeScreen
-                // Make sure you have a HomeScreen class defined to navigate to
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                // Navigate to the ExploreScreen
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetsPage()));
               },
             ),
             ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('About Us'),
+              leading: const Icon(Icons.work),
+              title: Text('Projects'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
-                // Navigate to the HomeScreen
-                // Make sure you have a HomeScreen class defined to navigate to
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                // Navigate to the ProjectsScreen
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProjectsPage()));
               },
             ),
-            // ... Other list tiles for menu items
+            ListTile(
+              leading: Icon(Icons.update),
+              title: Text('Updates'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                // Navigate to the UpdatesScreen
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UserReadData()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.image),
+              title: Text('Gallery'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                // Navigate to the GalleryScreen
+                Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPage()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About Us'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                // Navigate to the AboutUsScreen
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsPage()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.contact_mail),
+              title: Text('Contact Us'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                // Navigate to the ContactUsScreen
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUsPage()));
+              },
+            ),
           ],
         ),
       ),
@@ -80,16 +125,16 @@ class AdminPanelPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, '/createPage'); // Navigate to Create Page
                     },
-                    child: const Text(
-                      'Create',
-                      style: TextStyle(color: Colors.white), // Set text color to white
-                    ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Set the background color to blue
-                      minimumSize: const Size.fromHeight(60), // Set the height of the button
+                      backgroundColor: Colors.blue,
+                      minimumSize: const Size.fromHeight(60),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6), // Set the border radius
+                        borderRadius: BorderRadius.circular(6),
                       ),
+                    ),
+                    child: const Text(
+                      'Create News',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -99,16 +144,16 @@ class AdminPanelPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, '/readPage'); // Navigate to Read Page
                     },
-                    child: const Text(
-                      'Read',
-                      style: TextStyle(color: Colors.white), // Set text color to white
-                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue, // Set the background color to blue
                       minimumSize: const Size.fromHeight(60), // Set the height of the button
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6), // Set the border radius
                       ),
+                    ),
+                    child: const Text(
+                      'Read News',
+                      style: TextStyle(color: Colors.white), // Set text color to white
                     ),
                   ),
                 ),
@@ -121,16 +166,36 @@ class AdminPanelPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, '/updatePage'); // Navigate to Update Page
                 },
-                child: const Text(
-                  'Update',
-                  style: TextStyle(color: Colors.white), // Set text color to white
-                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Set the background color to blue
                   minimumSize: Size.fromHeight(60), // Set the height of the button
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6), // Set the border radius
                   ),
+                ),
+                child: const Text(
+                  'Update News',
+                  style: TextStyle(color: Colors.white), // Set text color to white
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 375, // Set the width of the button
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/adduser'); // Navigate to Update Page
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, // Set the background color to blue
+                  minimumSize: Size.fromHeight(60), // Set the height of the button
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6), // Set the border radius
+                  ),
+                ),
+                child: const Text(
+                  'Add User',
+                  style: TextStyle(color: Colors.white), // Set text color to white
                 ),
               ),
             ),

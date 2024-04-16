@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
+import 'homepage.dart';
 import 'package:cosmos_companion/screens/planetpage.dart';
 import 'package:cosmos_companion/screens/projectspage.dart';
-import 'package:cosmos_companion/screens/welcomepage.dart';
-import 'package:flutter/material.dart';
 import '../admin/user_read.dart';
 import 'aboutus.dart';
 import 'contactus.dart';
@@ -9,43 +10,20 @@ import 'favoritepage.dart';
 import 'gallery.dart';
 import 'homepage.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
-    );
-  }
-}
 
 class AboutUsPage extends StatelessWidget {
-  final double textPositionFromTop =
-  200;
-
-  String get imageUrl => 'https://i.ibb.co/KmR4ghK/image-16-1-1.png'; // Adjust this value to move the text boxes up or down
-
   @override
   Widget build(BuildContext context) {
+    // Calculate the total available height based on the screen size
+    final screenHeight = MediaQuery.of(context).size.height;
+    final appBarHeight = AppBar().preferredSize.height;
+    final paddingTop = MediaQuery.of(context).padding.top;
+    // Available height for the body
+    final bodyHeight = screenHeight - appBarHeight - paddingTop;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white),
-          onPressed: () {
-            // Add your onPressed code here!
-          },
-        ),
-        actions: const <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/image-17-1.png'),
-            ),
-          ),
-        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -56,7 +34,7 @@ class AboutUsPage extends StatelessWidget {
             const DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage('https://i.ibb.co/8b0Wk3G/2150918835-1.jpg'), // Replace 'https://example.com/your_image.jpg' with your image URL
+                  image: AssetImage('assets/img/welcome_page_img.png'), // Replace 'assets/your_image_name.png' with your local asset path
                   fit: BoxFit.cover,
                 ),
               ),
@@ -139,57 +117,66 @@ class AboutUsPage extends StatelessWidget {
       ),
       body: Stack(
         children: <Widget>[
-          Image.network(
-            imageUrl,
+          Image.asset(
+            'assets/img/welcome_page_img.png',
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
             alignment: Alignment.center,
           ),
-
-          const Positioned(
-            top: 30,
-            left: 0,
-            right: 0,
+          Positioned.fill(
             child: Column(
               children: <Widget>[
-                Text(
+                const SizedBox(height: 50), // Respect the status bar height
+                const Text(
                   'WHO ARE WE',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 35,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
-                Text(
+                const Text(
                   'COSMOS COMPANION',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 4,
+                    fontSize: 8,
                     color: Colors.white,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
-                SizedBox(height: 200), // Space before the paragraph starts
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 16), // Side padding for the paragraph
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                      height: 1.5, // Line height for the paragraph
+
+                Expanded(
+                  // Flex property allows for proportional sizes
+                  flex: 2, // Adjust flex proportion as needed
+                  child: Center(
+                    child: Image.network(
+                      'https://i.ibb.co/2v9YHLV/Rimberio-1-removebg-preview.png',
+                      width: 100, // Set width as needed
+                      height: 100, // Set height as needed
                     ),
                   ),
                 ),
+                const Expanded(
+                  flex: 3, // Adjust flex proportion as needed
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                        height: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40), // Padding for the bottom of the screen
               ],
             ),
           ),
-          // Add your other widgets on top of the background here
         ],
       ),
     );

@@ -23,9 +23,9 @@ class _SignUpState extends State<SignUp> {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-              "User Added",
+              "Registered Successfully",
               style: TextStyle(fontSize: 20.0),
             )));
         // ignore: use_build_context_synchronously
@@ -33,14 +33,14 @@ class _SignUpState extends State<SignUp> {
             context, MaterialPageRoute(builder: (context) => LogIn()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Colors.orangeAccent,
               content: Text(
                 "Password Provided is too Weak",
                 style: TextStyle(fontSize: 18.0),
               )));
         } else if (e.code == "email-already-in-use") {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Colors.orangeAccent,
               content: Text(
                 "Account Already exists",
@@ -60,13 +60,13 @@ class _SignUpState extends State<SignUp> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              child: Image.asset('assets/img/welcome_page_img.png',
+              child: Image.asset('assets/astronomy.png',
                 height: 270,
                 width: 20,
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 20,
               width:20,
             ),
@@ -90,14 +90,14 @@ class _SignUpState extends State<SignUp> {
                           return null;
                         },
                         controller: namecontroller,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Name",
                             hintStyle: TextStyle(
                                 color: Color(0xFFb2b7bf), fontSize: 18.0)),
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 30.0,
                     ),
                     Container(
@@ -114,19 +114,19 @@ class _SignUpState extends State<SignUp> {
                           return null;
                         },
                         controller: mailcontroller,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Email",
                             hintStyle: TextStyle(
                                 color: Color(0xFFb2b7bf), fontSize: 18.0)),
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 30.0,
                     ),
                     Container(
                       padding:
-                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
                           color: Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
@@ -138,7 +138,7 @@ class _SignUpState extends State<SignUp> {
                           return null;
                         },
                         controller: passwordcontroller,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             border: InputBorder.none,
 
                             hintText: "Password",
@@ -146,7 +146,7 @@ class _SignUpState extends State<SignUp> {
                                 color: Color(0xFFb2b7bf), fontSize: 18.0)),
                         obscureText: true,  ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 30.0,
                     ),
                     GestureDetector(
@@ -162,14 +162,14 @@ class _SignUpState extends State<SignUp> {
                       },
                       child: Container(
                           width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                               vertical: 13.0, horizontal: 30.0),
                           decoration: BoxDecoration(
-                              color: const Color(0xFF273671),
+                              color: Color(0xFF273671),
                               borderRadius: BorderRadius.circular(30)),
-                          child: const Center(
+                          child: Center(
                               child: Text(
-                                "Add User",
+                                "Create Account",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 22.0,
@@ -181,17 +181,17 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 40.0,
             ),
-            const Text(
+            Text(
               "or Sign up with",
               style: TextStyle(
                   color: Color(0xFF273671),
                   fontSize: 22.0,
                   fontWeight: FontWeight.w500),
             ),
-            const SizedBox(
+            SizedBox(
               height: 30.0,
             ),
             Row(
@@ -207,7 +207,7 @@ class _SignUpState extends State<SignUp> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 30.0,
                   width: 30.0,
                 ),
@@ -223,19 +223,19 @@ class _SignUpState extends State<SignUp> {
                 )
               ],
             ),
-            const SizedBox(
+            SizedBox(
               height: 30.0,
               width: 30.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account?",
+                Text("Already have an account?",
                     style: TextStyle(
                         color: Color(0xFF8c8e98),
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500)),
-                const SizedBox(
+                SizedBox(
                   width: 5.0,
                 ),
                 GestureDetector(
@@ -243,7 +243,7 @@ class _SignUpState extends State<SignUp> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LogIn()));
                   },
-                  child: const Text(
+                  child: Text(
                     "Sign In",
                     style: TextStyle(
                         color: Color(0xFF273671),

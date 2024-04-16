@@ -3,6 +3,7 @@ import 'package:cosmos_companion/admin/updates_add.dart';
 import 'package:cosmos_companion/admin/updates_read.dart';
 import 'package:cosmos_companion/admin/user_read.dart';
 import 'package:cosmos_companion/screens/aboutus.dart';
+import 'package:cosmos_companion/screens/add_user.dart';
 import 'package:cosmos_companion/screens/adminpanel.dart';
 import 'package:cosmos_companion/screens/contactus.dart';
 import 'package:cosmos_companion/screens/favoritepage.dart';
@@ -35,19 +36,18 @@ void main() async{
 
 class CosmosCompanion extends StatelessWidget {
   const CosmosCompanion({super.key});
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
+
       title: 'Cosmos Companion',
-      // Application theme data, you can set the colors for the application as
-      // you want
+
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      // A widget which will be started on application startup
+
       home:  WelcomePage(),
       routes: {
         '/createPage': (context) => const UpdatesAdd(),
@@ -63,6 +63,7 @@ class CosmosCompanion extends StatelessWidget {
         '/aboutUs': (context) =>  AboutUsPage(),
         '/contactUs': (context) => const ContactUsPage(),
         '/chatbot': (context) => const ChatScreen(),
+        '/adduser': (context) => const SignUp(),
       },
     );
   }
