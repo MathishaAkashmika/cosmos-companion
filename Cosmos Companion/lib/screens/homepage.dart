@@ -1,8 +1,9 @@
 import 'package:cosmos_companion/screens/planetpage.dart';
 import 'package:cosmos_companion/screens/projectspage.dart';
-import 'package:cosmos_companion/shared/user_read.dart';
 import 'package:cosmos_companion/screens/welcomepage.dart';
 import 'package:flutter/material.dart';
+
+import '../admin/user_read.dart';
 import 'aboutus.dart';
 import 'contactus.dart';
 import 'favoritepage.dart';
@@ -13,14 +14,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'COSMOS Companion',
           style: TextStyle(
-            color: Colors.black, // Change to your desired color
+            color: Colors.black,
           ),
         ),
-        backgroundColor: Colors.white, // Optional: Make the AppBar transparent
-        elevation: 0, // No shadow
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       drawer: Drawer(
         child: ListView(
@@ -29,7 +30,7 @@ class HomePage extends StatelessWidget {
             const DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage('https://i.ibb.co/8b0Wk3G/2150918835-1.jpg'), // Replace 'https://example.com/your_image.jpg' with your image URL
+                  image: AssetImage('assets/img/welcome_page_img.png'), // Replace 'assets/your_image_name.png' with your local asset path
                   fit: BoxFit.cover,
                 ),
               ),
@@ -110,33 +111,31 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-
-      extendBodyBehindAppBar: true, // Extends the body content behind the AppBar
+      extendBodyBehindAppBar: true,
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage('https://i.ibb.co/KmR4ghK/image-16-1-1.png'),
+            image: AssetImage('assets/img/background_image.jpg'),
             fit: BoxFit.cover,
           ),
         ),
         child: Column(
           children: [
-            SizedBox(height: 200), // Adjust the height to create sufficient spacing after the AppBar
+            SizedBox(height: 100),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 2,
-                padding: EdgeInsets.all(16),
+                crossAxisCount: 1,
+                padding: EdgeInsets.all(30),
                 childAspectRatio: 1.5,
                 children: <Widget>[
-                  _buildButton(context, "Join", Icons.home, '/login', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "Explore", Icons.public, '/planetPage', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "TopProjects", Icons.star, '/topProjects', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "Updates", Icons.update, '/updates', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "Gallery", Icons.photo_library, '/gallery', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "Favorites", Icons.favorite, '/favorites', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "AboutUs", Icons.info, '/aboutUs', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "ContactUs", Icons.contacts, '/contactUs', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
-                  _buildButton(context, "ChatBot", Icons.contacts, '/login', 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712880000&semt=sph'),
+                  _buildButton(context, "Join", Icons.home, '/login', 'assets/img/home_3.jpg'),
+                  _buildButton(context, "Explore", Icons.public, '/planetPage', 'assets/img/home_3.jpg'),
+                  _buildButton(context, "TopProjects", Icons.star, '/topProjects', 'assets/img/home_3.jpg'),
+                  _buildButton(context, "ChatBot", Icons.contacts, '/login', 'assets/img/home_3.jpg'),
+                  _buildButton(context, "Updates", Icons.update, '/updates', 'assets/img/home_3.jpg'),
+                  _buildButton(context, "Gallery", Icons.photo_library, '/gallery', 'assets/img/home_3.jpg'),
+                  _buildButton(context, "Favorites", Icons.favorite, '/favorites', 'assets/img/home_3.jpg'),
+                  _buildButton(context, "ContactUs", Icons.contacts, '/contactUs', 'assets/img/home_3.jpg'),
                 ],
               ),
             ),
@@ -154,16 +153,17 @@ class HomePage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(imageUrl),
+              image: AssetImage(imageUrl),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(1), BlendMode.dstATop),
+              colorFilter: ColorFilter.mode(Colors.black, BlendMode.dstATop),
             ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(icon, size: 50, color: Colors.black),
-              Text(title, style: TextStyle(fontSize: 16, color: Colors.black)),
+              Icon(icon, size: 50, color: Colors.white),
+              SizedBox(height: 10),// Adjusted for visibility
+              Text(title, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),  // Adjusted for visibility
             ],
           ),
         ),
@@ -171,4 +171,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

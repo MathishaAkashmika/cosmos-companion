@@ -18,8 +18,8 @@ class ProjectCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Image.network(
-            project.imageUrl,
+          Image.asset(
+            project.imageUrl, // Ensure this now points to a local asset path
             height: 160, // Specify a height for the image
             width: double.infinity,
             fit: BoxFit.cover, // Cover the card area without distorting the image

@@ -1,8 +1,9 @@
 import 'package:cosmos_companion/screens/projectspage.dart';
-import 'package:cosmos_companion/shared/user_read.dart';
+import 'package:cosmos_companion/screens/viewpage.dart';
 import 'package:cosmos_companion/screens/welcomepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../admin/user_read.dart';
 import 'aboutus.dart';
 import 'contactus.dart';
 import 'favoritepage.dart';
@@ -38,14 +39,42 @@ class _PlanetsPageState extends State<PlanetsPage> {
       'description': "Saturn is the sixth planet from the Sun and the second-largest in the Solar System after Jupiter. It is a gas giant with an average radius of about nine-and-a-half times that of Earth. It has only one-eighth the average density of Earth but is over 95 times more massive. Even though Saturn is nearly the size of Jupiter Saturn has less than one-third of Jupiters mass. Saturn orbits the Sun at a distance of 9.59 AU (1434 million km) with an orbital period of 29.45 years.Saturns interior is thought to be composed of a rocky core surrounded by a deep layer of metallic hydrogen an intermediate layer of liquid hydrogen and liquid helium and finally a gaseous outer layer. Saturn has a pale yellow hue due to ammonia crystals in its upper atmosphere. An electrical current within the metallic hydrogen layer is thought to give rise to Saturns planetary magnetic field which is weaker than Earths but which has a magnetic moment 580 times that of Earth due to Saturns larger size. Saturns magnetic field strength is around one-twentieth of Jupiters. The outer atmosphere is generally bland and lacking in contrast although long-lived features can appear. Wind speeds on Saturn can reach 1800 kilometres per hour.The planet has a bright and extensive ring system composed mainly of ice particles with a smaller amount of rocky debris and dust. At least 146 moons are known to orbit the planet of which 63 are officially named; this does not include the hundreds of moonlets in its rings. Titan Saturns largest moon and the second largest in the Solar System is larger (while less massive) than the planet Mercury and is the only moon in the Solar System to have a substantial atmosphere.",
       'isFavorite': false,
     },
-    // ... Other planets
   ];
 
-  void _toggleFavorite(String title) {
+
+  List<Map<String, dynamic>> favorites = [];
+
+  void _toggleFavorite(Map<String, dynamic> planet) {
     setState(() {
-      final planet = planets.firstWhere((element) => element['title'] == title);
-      planet['isFavorite'] = !planet['isFavorite'];
+      bool isCurrentlyFavorite = planet['isFavorite'];
+      if (isCurrentlyFavorite) {
+        favorites.removeWhere((item) => item['id'] == planet['id']);
+      } else {
+        favorites.add({...planet, 'isFavorite': true});  // Ensure a copy is added with 'isFavorite' set true
+      }
+      planet['isFavorite'] = !isCurrentlyFavorite;  // Toggle the favorite status directly
     });
+  }
+
+
+  void _navigateToFavorites() async {
+    final updatedFavorites = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FavoritesPage(favorites: List.from(favorites)), // Pass a copy of favorites
+      ),
+    ) as List<Map<String, dynamic>>?;
+
+    if (updatedFavorites != null) {
+      setState(() {
+        favorites = updatedFavorites;
+        // Reconcile 'isFavorite' status for all planets by setting it to false initially
+        // and then setting it to true if the planet is in the updated favorites list
+        for (var planet in planets) {
+          planet['isFavorite'] = updatedFavorites.any((item) => item['id'] == planet['id']);
+        }
+      });
+    }
   }
 
   @override
@@ -53,14 +82,17 @@ class _PlanetsPageState extends State<PlanetsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Planets'),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            );
-          },
-        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FavoritesPage(favorites: favorites),
+              ),
+            ),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -69,7 +101,7 @@ class _PlanetsPageState extends State<PlanetsPage> {
             const DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(''), // Replace 'https://example.com/your_image.jpg' with your image URL
+                  image: AssetImage('assets/img/welcome_page_img.png'), // Replace 'assets/your_image_name.png' with your local asset path
                   fit: BoxFit.cover,
                 ),
               ),
@@ -155,8 +187,8 @@ class _PlanetsPageState extends State<PlanetsPage> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(""), // Background image URL
-                fit: BoxFit.cover, // Ensures the image covers the background
+                image: AssetImage('assets/img/background_image.jpg'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -169,7 +201,7 @@ class _PlanetsPageState extends State<PlanetsPage> {
                 description: planet['description'],
                 imageUrl: planet['imageUrl'],
                 isFavorite: planet['isFavorite'],
-                onFavoriteToggle: () => _toggleFavorite(planet['title']),
+                onFavoriteToggle: () => _toggleFavorite(planet),
                 onTap: () {
                   Navigator.push(
                     context,
