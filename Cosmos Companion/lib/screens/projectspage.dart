@@ -17,22 +17,21 @@ class ProjectsPage extends StatelessWidget {
     Project(
         id: 1,
         title: 'Project 1',
-        description: 'This is a description of Project 1.This is a description of Project 1.This is a description of Project 1.',
-        imageUrl: 'https://i.ibb.co/pWb95wD/2151075901-1.jpg'
+        description: 'This is a description of Project 1.',
+        imageUrl: 'assets/img/welcome_page_img.png'
     ),
     Project(
         id: 2,
         title: 'Project 2',
-        description: 'This is a description of Project 1.This is a description of Project 1.This is a description of Project 1.',
-        imageUrl: 'https://i.ibb.co/pWb95wD/2151075901-1.jpg'
+        description: 'This is a description of Project 2.',
+        imageUrl: 'assets/img/welcome_page_img.png'
     ),
     Project(
         id: 3,
         title: 'Project 3',
-        description: 'This is a description of Project 1.This is a description of Project 1.This is a description of Project 1.',
-        imageUrl: 'https://i.ibb.co/pWb95wD/2151075901-1.jpg'
+        description: 'This is a description of Project 3.',
+        imageUrl: 'assets/img/welcome_page_img.png'
     ),
-    // Add more projects as needed
   ];
 
   ProjectsPage({Key? key}) : super(key: key);
@@ -41,13 +40,21 @@ class ProjectsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Projects'),
+        title: const Text('Project'),
       ),
-      body: ListView.builder(
-        itemCount: projects.length,
-        itemBuilder: (context, index) {
-          return ProjectCard(project: projects[index]);
-        },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/img/background_image.jpg'), // Path to your background image
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: projects.length,
+          itemBuilder: (context, index) {
+            return ProjectCard(project: projects[index]);
+          },
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -56,7 +63,7 @@ class ProjectsPage extends StatelessWidget {
             const DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage('https://i.ibb.co/8b0Wk3G/2150918835-1.jpg'), // Replace 'https://example.com/your_image.jpg' with your image URL
+                  image: AssetImage('assets/img/welcome_page_img.png'), // Replace 'assets/your_image_name.png' with your local asset path
                   fit: BoxFit.cover,
                 ),
               ),

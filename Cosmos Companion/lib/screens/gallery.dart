@@ -52,11 +52,13 @@ class GalleryPage extends StatelessWidget {
             const DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage('https://i.ibb.co/8b0Wk3G/2150918835-1.jpg'), // Replace 'https://example.com/your_image.jpg' with your image URL
+                  image: AssetImage('assets/img/welcome_page_img.png'),
+                  // Replace 'assets/your_image_name.png' with your local asset path
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Text('Cosmos Companion', style: TextStyle(color: Colors.white, fontSize: 24)),
+              child: Text('Cosmos Companion',
+                  style: TextStyle(color: Colors.white, fontSize: 24)),
             ),
             ListTile(
               leading: const Icon(Icons.home),
@@ -65,7 +67,8 @@ class GalleryPage extends StatelessWidget {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the HomeScreen
                 // Make sure you have a HomeScreen class defined to navigate to
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
               },
             ),
             ListTile(
@@ -73,7 +76,8 @@ class GalleryPage extends StatelessWidget {
               title: Text('Favorites'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesPage(favorites: [],)));
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => FavoritesPage(favorites: [],)));
               },
             ),
             ListTile(
@@ -82,7 +86,8 @@ class GalleryPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the ExploreScreen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PlanetsPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PlanetsPage()));
               },
             ),
             ListTile(
@@ -91,7 +96,8 @@ class GalleryPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the ProjectsScreen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProjectsPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProjectsPage()));
               },
             ),
             ListTile(
@@ -100,7 +106,8 @@ class GalleryPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the UpdatesScreen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UserReadData()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserReadData()));
               },
             ),
             ListTile(
@@ -109,56 +116,69 @@ class GalleryPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the GalleryScreen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => GalleryPage()));
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About Us'),
+              leading: const Icon(Icons.info),
+              title: const Text('About Us'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the AboutUsScreen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AboutUsPage()));
               },
             ),
             ListTile(
-              leading: Icon(Icons.contact_mail),
-              title: Text('Contact Us'),
+              leading: const Icon(Icons.contact_mail),
+              title: const Text('Contact Us'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the ContactUsScreen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUsPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ContactUsPage()));
               },
             ),
           ],
         ),
       ),
-      body: GridView.builder(
-        itemCount: _imageUrls.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/img/background_image.jpg'),
+            // Path to your background image
+            fit: BoxFit.cover,
+          ),
         ),
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailPage(imageUrl: _imageUrls[index]),
+        child: GridView.builder(
+          itemCount: _imageUrls.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 4.0,
+          ),
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        DetailPage(imageUrl: _imageUrls[index]),
+                  ),
+                );
+              },
+              child: Hero(
+                tag: _imageUrls[index],
+                child: Image.network(
+                  _imageUrls[index],
+                  fit: BoxFit.cover,
                 ),
-              );
-            },
-            child: Hero(
-              tag: _imageUrls[index],
-              child: Image.network(
-                _imageUrls[index],
-                fit: BoxFit.cover, // Ensure all images fit the screen
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

@@ -3,7 +3,6 @@ import 'package:cosmos_companion/admin/updates_read.dart';
 import 'package:cosmos_companion/service/database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../screens/aboutus.dart';
 import '../screens/contactus.dart';
 import '../screens/favoritepage.dart';
@@ -48,7 +47,7 @@ class _ReadDataState extends State<UserReadData> {
             const DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/img/welcome_page_img.png'), // Replace 'assets/your_image_name.png' with your local asset path
+                  image: NetworkImage('https://i.ibb.co/8b0Wk3G/2150918835-1.jpg'), // Replace 'https://example.com/your_image.jpg' with your image URL
                   fit: BoxFit.cover,
                 ),
               ),
@@ -96,7 +95,7 @@ class _ReadDataState extends State<UserReadData> {
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Navigate to the UpdatesScreen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UserReadData()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ReadData()));
               },
             ),
             ListTile(

@@ -7,9 +7,6 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // URL of the background image
-    const String backgroundImageUrl =
-        'https://i.ibb.co/VgTnP32/image-1-1.png';
 
     return Scaffold(
       body: Stack(
@@ -18,12 +15,12 @@ class WelcomePage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(backgroundImageUrl),
+                image: AssetImage('assets/img/welcome_page_img.png'),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-            Align(
+          Align(
             alignment: Alignment.center,
             child: Container(
             height: 600, // Adjust the height as needed
